@@ -16,21 +16,21 @@ var request = {
 };
 
 $(document).ready(function(){
-  $.post(url, JSON.stringify(request), function(response) {
-  // var response = {
-  //   result:{
-  //     username: 'Snekw',
-  //     id: 123,
-  //     logged_in: true
-  //   }
-  // };
+  // $.post(url, JSON.stringify(request), function(response) {
+  var response = {
+    result:{
+      username: 'Snekw',
+      id: 123,
+      logged_in: true
+    }
+  };
     if (response.result) {
       user = response.result;
       afterRequest(response.result);
     }
     else
       afterRequest({});
-  }, "json");
+  // }, "json");
 });
 
 function afterRequest(result){
