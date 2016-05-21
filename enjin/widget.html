@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <style scoped>
+    .snwHidden {
+      display: none;
+    }
+  </style>
+  <div id="discordWidget"></div>
+  <div id="discordLink">
+    <div class="element_button">
+      <input id="link" onclick="CreateDiscordLink()" style="width: 350px" type="button" value="Link your Enjin account to discord!"/>
+    </div>
+    <div class="snwHidden">Join our Discord server and type in the following command:</div>
+    <input id="cmd" class="snwHidden" type="text" value="" readonly/>
+    <div class="snwHidden">The command will expire after 10 minutes!</div>
+  </div>
+  <script src="widget.js" async></script>
+</body>
+</html>

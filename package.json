@@ -1,0 +1,20 @@
+{
+  "name": "snw-bot",
+  "version": "0.0.1",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "coming"
+  },
+  "description": "snw-bot",
+  "main": "snw-bot.js",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.1",
+    "discord.js": "^7.0.1",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.17",
+    "request": "^2.72.0"
+  }
+}
