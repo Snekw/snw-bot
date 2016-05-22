@@ -3,7 +3,7 @@
  */
 "use strict";
 var url = "/api/v1/api.php";
-var botApiUrl = '';
+var botApiUrl = 'https://api.snekw.com';
 var discordWidgetUrl = '';
 var user = {};
 
