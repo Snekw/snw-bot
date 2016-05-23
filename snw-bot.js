@@ -52,8 +52,10 @@ snwBot.on('presence', function(oldUser, newUser){
   }
 });
 
-
-snwBot.loginWithToken(cfg.bot.token).then(loginSuccess).catch(loginErr);
+if(cfg.bot.token.length > 0)
+  snwBot.loginWithToken(cfg.bot.token).then(loginSuccess).catch(loginErr);
+else
+  console.log('NO TOKEN!');
 
 function loginSuccess(success){
   console.log('Logged in');
