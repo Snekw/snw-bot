@@ -15,4 +15,6 @@ apt-get install -y nodejs
 apt-get install -y build-essential
 
 #jq
-apt-get install jq
+apt-get install -y jq
+
+npm i --production
