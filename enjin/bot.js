@@ -2,16 +2,12 @@
  * Created by Ilkka on 18.5.2016.
  */
 "use strict";
-var snwBot = {};
+var snwBot = require('../snw-bot').snwBot;
 var lib = require('../lib');
 var cmd = require('../commands');
 var enjin = require('./enjin');
 var dbEnjin = require('./dbModels/models');
 var o = {};
-
-o.setBot = function(bot){
-  snwBot = bot;
-};
 
 o.register = function(){
   cmd.registerCommand('enjin', function(message, msg){

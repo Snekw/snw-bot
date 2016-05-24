@@ -2,12 +2,8 @@
  * Created by Ilkka on 12.5.2016.
  */
 "use strict";
-var snwBot;
+var snwBot = require('./snw-bot').snwBot;
 var o = {};
-
-o.setBot = function(bot){
-  snwBot = bot;
-};
 
 o.getUserServers = function(user){
   var ret = [];
@@ -48,24 +44,38 @@ o.getChannelWithName = function(server, name){
   return ret;
 };
 
-o.sendToBotChannels = function(message, user, noTime = true){
-  var channels = o.getBotChannels(o.getUserServers(user));
-  for(var i = 0; i < channels.length; i++){
+o.sendToBotChannels = function(message, user = null, noTime = true){
+  return new Promise(function(resolve){
+    var channels;
+    if(user != null){
+      channels = o.getBotChannels(o.getUserServers(user));
+    }else{
+      channels = o.getBotChannels(snwBot.servers);
+    }
+
+    for(var i = 0; i < channels.length; i++){
+      var time = new Date();
+      if(!noTime){
+        message = '['+ time.toUTCString() +'] ' + message;
+      }
+      snwBot.sendMessage(channels[i], message).then(function(){
+        resolve();
+      });
+    }
+  });
+};
+
+o.sendToModerationChannel = function(message, server, noTime = true){
+  return new Promise(function(resolve){
+    var channel = o.getChannelWithName(server, 'snw-moderation');
     var time = new Date();
     if(!noTime){
       message = '['+ time.toUTCString() +'] ' + message;
     }
-    snwBot.sendMessage(channels[i], message);
-  }
-};
-
-o.sendToModerationChannel = function(message, server, noTime = true){
-  var channel = o.getChannelWithName(server, 'snw-moderation');
-  var time = new Date();
-  if(!noTime){
-    message = '['+ time.toUTCString() +'] ' + message;
-  }
-  snwBot.sendMessage(channel, message);
+    snwBot.sendMessage(channel, message).then(function(){
+      resolve();
+    });
+  });
 };
 
 o.setNick = function(server, user, nick='null'){
