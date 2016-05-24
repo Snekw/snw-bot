@@ -14,8 +14,7 @@
     "body-parser": "^1.15.1",
     "discord.js": "^7.0.1",
     "express": "^4.13.4",
-    "mongoose": "^4.4.17",
-    "request": "^2.72.0"
+    "mongoose": "^4.4.17"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",
