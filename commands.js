@@ -3,10 +3,20 @@
  */
 "use strict";
 var o = {};
+var fs = require('fs');
 var snwBot = require('./snw-bot').snwBot;
-var config = require('./configSelector')('main');
+var config = require('./config/configSelector')('main');
 
 var _cmds = [];
+
+o.registerCommandDir = function(){
+  fs.readdirSync('./command').forEach(function(file){
+    var temp = require('./command/' + file);
+    if(temp.enabled){
+      temp.registerCommands();
+    }
+  });
+};
 
 o.registerCommandHandler = function(){
   snwBot.on('message', function(message){
@@ -15,14 +25,21 @@ o.registerCommandHandler = function(){
     msg[0] = msg[0].toLowerCase();
 
     for(var i = 0; i < _cmds.length; i++){
+      //main command
       if(_cmds[i].cmd == msg[0]){
-        _cmds[i].handler(message, msg);
+        if(o.rolesCheck(message, _cmds[i].roles)){
+          _cmds[i].handler(message, msg);
+        }
         break;
       }else{
+
+        //Check for aliases
         var found = false;
         for(var d = 0; d < _cmds[i].aliases.length; d++){
           if(_cmds[i].aliases[d] == msg[0]){
-            _cmds[i].handler(message,msg);
+            if(o.rolesCheck(message, _cmds[i].roles)){
+              _cmds[i].handler(message, msg);
+            }
             found = true;
             break;
           }
@@ -32,6 +49,39 @@ o.registerCommandHandler = function(){
     }
   });
   console.log('Command handler registered');
+};
+
+o.rolesCheck = function(message, roles){
+    if(!message || !roles){
+      return false;
+    }
+    for(var i = 0; i < roles.length; i++){
+      if(o.roleCheck(message, roles[i])){
+        return true;
+      }
+    }
+    return false;
+};
+
+o.roleCheck = function(message, role){
+  if(!message || !role){
+    return false;
+  }
+  var found = false;
+  for(var i = 0; i < config.bot.roles.length; i++){
+    if(config.bot.roles[i].name === role){
+      role = config.bot.roles[i].id;
+      found = true;
+      break;
+    }
+  }
+  if(!found){
+    return false;
+  }
+
+ if(snwBot.userHasRole(message.author, role)){
+   return true;
+ }
 };
 
 o.getRegisteredCommands = function(){
@@ -54,7 +104,7 @@ o.removeCommand = function(cmd){
 };
 
 class Command {
-  constructor(cmd, aliases, name, description, usage, handler){
+  constructor(cmd, aliases, name, description, usage, roles, handler){
 
     if(name){
       this._cmd = cmd;
@@ -62,6 +112,7 @@ class Command {
       this._name = name || 'No name';
       this._description = description || 'No description';
       this._usage = 'Usage: ' + usage || 'No usage info';
+      this._roles = roles || ['administrator'];
       this._handler = handler || function(message, msg){
           snwBot.reply(message, 'No command handler set for: ' + msg.toString());
         };
@@ -71,6 +122,7 @@ class Command {
       this._name = cmd.name || 'No name';
       this._description = cmd.description || 'No description';
       this._usage = 'Usage: ' + cmd.usage || 'No usage info';
+      this._roles = cmd.roles || ['administrator'];
       this._handler = cmd.handler || function(message, msg){
           snwBot.reply(message, 'No command handler set for: ' + msg.toString());
         };
@@ -95,6 +147,10 @@ class Command {
 
   get aliases(){
     return this._aliases;
+  }
+
+  get roles(){
+    return this._roles;
   }
 
   handler(message, msg){

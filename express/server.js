@@ -11,7 +11,7 @@ var app = require('./app');
 var https = require('https');
 var http = require('http');
 var fs = require('fs');
-var config = require('../configSelector')('main');
+var config = require('../config/configSelector')('main');
 
 /**
  * Get port from environment and store in Express.

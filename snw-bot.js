@@ -5,10 +5,10 @@
 "use strict";
 var Discord = require('discord.js');
 var snwBot = new Discord.Client();
-var cfg = require('./configSelector')('main');
+var config = require('./config/configSelector')('main');
 
-if(cfg.bot.token.length > 0)
-  snwBot.loginWithToken(cfg.bot.token).then(loginSuccess).catch(loginErr);
+if(config.bot.token.length > 0)
+  snwBot.loginWithToken(config.bot.token).then(loginSuccess).catch(loginErr);
 else
   console.log('NO TOKEN!');
 

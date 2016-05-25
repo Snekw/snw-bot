@@ -4,8 +4,8 @@
 "use strict";
 module.exports = function(conf){
   if (process.env.SNW_BOT_DEV){
-    return require('./config/' + conf + 'ConfigDev');
+    return require('./' + conf + 'ConfigDev');
   }else{
-    return require('./config/' + conf + 'Config');
+    return require('./' + conf + 'Config');
   }
 };

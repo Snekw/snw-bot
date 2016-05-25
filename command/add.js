@@ -6,7 +6,7 @@ var snwBot = require('../snw-bot').snwBot;
 var cmd = require('../commands');
 var mongoose = require('mongoose');
 
-require('./customCmd');
+require('../db/customCmd');
 var customCmd = mongoose.model('customCmd');
 
 var addCmd = function(message, msg){
@@ -161,6 +161,7 @@ var list = new cmd.Command({
 
 
 module.exports = {
+  enabled: true,
   registerCommands: function(){
     cmd.registerCommand(add);
     cmd.registerCommand(remove);

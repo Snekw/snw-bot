@@ -5,7 +5,13 @@
 module.exports = {
   bot:{
     prefix:'.',
-    token: ''    
+    token: '',
+    //These are Discord role ID's
+    roles:[
+      {name: 'administrator', id:''},
+      {name: 'moderator', id:''},
+      {name: 'member', id:''}
+    ]
   },
   db:{
     connectionString: 'mongodb://localhost/snw-bot'

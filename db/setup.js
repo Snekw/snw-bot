@@ -3,6 +3,6 @@
  */
 "use strict";
 var mongoose = require('mongoose');
-var config = require('../configSelector')('main');
+var config = require('../config/configSelector')('main');
 
 mongoose.connect(config.db.connectionString);

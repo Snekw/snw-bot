@@ -8,8 +8,12 @@ Snw-bot is a discord bot.
  Both will be installed with the install repo.
 
 ##Installation
+For Linux:  
 See [Snw-bot-installer](https://github.com/snekw/snw-bot-installer) repository.
 This bot is easy to install using the info from that repository.
+
+For Windows:  
+No info yet.
 
 ##Config
 After installation add your bot token to the `mainConfig.js`

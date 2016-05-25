@@ -11,24 +11,11 @@ var enjin = require('./enjin/bot');
 var server = require('./express/server');
 var snwBot = require('./snw-bot').snwBot;
 
-var addCmd = require('./command/add');
-
 snwBot.on('ready', function(){
   cmd.registerCommandHandler();
   //require('./moderation')(snwBot);
 
-  var cmdExit = new cmd.Command({
-    cmd: 'exit',
-    name: 'Exit',
-    aliases: ['shutdown'],
-    description: 'Shutdown the bot',
-    usage: 'No params',
-    handler: function(message, msg){
-      processLife.handleExit();
-    }
-  });
-  addCmd.registerCommands();
-  cmd.registerCommand(cmdExit);
+  cmd.registerCommandDir();
   //Register enjin commands
   // enjin.register();
 
