@@ -16,7 +16,7 @@ var config = require('../config/configSelector')('main');
 /**
  * Get port from environment and store in Express.
  */
-var port = normalizePort( process.env.PORT || '2300');
+var port = normalizePort(process.env.PORT || '2300');
 app.set('port', port);
 
 /**
@@ -25,14 +25,14 @@ app.set('port', port);
 
 var useHttps = config.ssl.enabled;
 var server = null;
-if(useHttps === true){
+if (useHttps === true) {
   server = https.createServer({
     ca: fs.readFileSync(config.ssl.ca),
     key: fs.readFileSync(config.ssl.key),
     cert: fs.readFileSync(config.ssl.cert)
   }, app);
 
-}else{
+} else {
   server = http.createServer(app);
 }
 
@@ -78,7 +78,7 @@ function onError(error) {
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      throw new Error( bind + ' requires elevated privileges');
+      throw new Error(bind + ' requires elevated privileges');
     case 'EADDRINUSE':
       throw new Error(bind + ' is already in use');
     default:

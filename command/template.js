@@ -10,7 +10,7 @@ var cmd = require('../commands');
 
 module.exports = {
   enabled: false,
-  registerCommands: function(){
+  registerCommands: function () {
     //Register commands here
   }
 };

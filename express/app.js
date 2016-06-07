@@ -11,7 +11,7 @@ var app = express();
 require('../db/setup');
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 
 //CORS
 app.use(function (req, res, next) {
@@ -25,7 +25,7 @@ var enjin = require('../enjin/routes');
 app.use('/snw-bot/enjin', enjin);
 
 //Catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
@@ -33,11 +33,13 @@ app.use(function(req, res, next) {
 
 //Error handlers
 /* istanbul ignore next */
-app.use(function(err, req, res) {
+app.use(function (err, req, res) {
   res.status(err.status || 500);
-  res.json({success: false, message: err.message, error: {
-    status: err.status
-  }});
+  res.json({
+    success: false, message: err.message, error: {
+      status: err.status
+    }
+  });
 });
 
 module.exports = app;

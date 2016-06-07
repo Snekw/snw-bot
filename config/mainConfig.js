@@ -3,20 +3,20 @@
  */
 "use strict";
 module.exports = {
-  bot:{
-    prefix:'.',
+  bot: {
+    prefix: '.',
     token: '',
     //These are Discord role ID's
-    roles:[
-      {name: 'administrator', id:''},
-      {name: 'moderator', id:''},
-      {name: 'member', id:''}
+    roles: [
+      {name: 'admin', id: ''},
+      {name: 'mod', id: ''},
+      {name: 'member', id: ''}
     ]
   },
-  db:{
+  db: {
     connectionString: 'mongodb://localhost/snw-bot'
   },
-  ssl:{
+  ssl: {
     enabled: false,
     ca: '',
     key: '',

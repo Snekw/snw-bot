@@ -8,14 +8,14 @@ var server = require('./express/server');
 var lib = require('./lib');
 
 //Handle shutdown
-process.on('SIGINT', function(){
+process.on('SIGINT', function () {
   handleExit();
 });
 
-var handleExit = function(){
+var handleExit = function () {
   console.log('Shutting down');
-  lib.sendToBotChannels('Bot shutting down!').then(function(){
-    snwBot.logout(function(){
+  lib.sendToBotChannels('Bot shutting down!').then(function () {
+    snwBot.logout(function () {
       snwBot.removeAllListeners();
       server.close();
       mongoose.disconnect();
